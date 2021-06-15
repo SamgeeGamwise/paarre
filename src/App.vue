@@ -1,6 +1,8 @@
 <template>
-  <HelloWorld msg="Welcome" />
+  <Nav />
+  <router-view />
+  <Footer />
 </template>
 
-<script lang="ts" src="./App.ts" />
-<style lang="scss" src="./App.scss" />
+<script lang="ts" src="./App.ts"></script>
+<style lang="scss" src="./App.scss"></style>
