@@ -1,18 +1,7 @@
 <template>
-  <div>
-    <h1>This is the Home page</h1>
-    <button v-on:click="increment()">Push me!</button>
-  </div>
+  <h1>Home</h1>
+  <button v-on:click="logout">Logout</button>
 </template>
 
-<script lang="ts">
-export default {
-  methods: {
-    increment() {
-      this.$store.commit('increment');
-      console.log(this.$store.state.count);
-    },
-  },
-};
-</script>
+<script lang="ts" src="./Home.ts" />
 <style lang="scss" src="./Home.scss" />

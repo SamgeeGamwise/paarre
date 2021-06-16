@@ -1,0 +1,95 @@
+@import '../../styles/variables.scss';
+
+.banner {
+  margin-left: 15px;
+}
+
+.bannerImage {
+  height: 100vh;
+  width: calc(100% + 30px);
+  margin-left: -15px;
+  background-color: $black;
+  background-position: center;
+  object-fit: cover;
+  object-position: center;
+  position: relative;
+
+  @media (min-width: 576px) {
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    height: 100vh;
+  }
+
+  @media (min-width: 768px) {
+    width: calc(100% + 30px);
+    margin-left: -15px;
+    height: 100vh;
+  }
+}
+
+.bannerText {
+  text-align: center;
+  z-index: 100;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -80%);
+}
+
+.bannerTextHeader {
+  font-family: 'Syncopate', sans-serif !important;
+  color: $white;
+  margin-bottom: -30px;
+  font-size: 60px;
+
+  @media (min-width: 576px) {
+    margin-bottom: -30px;
+    font-size: 90px;
+  }
+
+  @media (min-width: 768px) {
+    margin-bottom: -60px;
+    font-size: 150px;
+  }
+}
+
+.bannerTextBody {
+  font-family: 'Mitr', sans-serif;
+  color: $white;
+  font-size: 30px;
+
+  @media (min-width: 576px) {
+    font-size: 45px;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 60px;
+  }
+}
+
+.bannerButton {
+  font-family: 'Mitr', sans-serif;
+  font-size: 20px;
+  padding-left: 40px;
+  padding-right: 40px;
+  border-radius: 50px;
+  border-width: 0;
+  background-image: linear-gradient(to right, lighten($primary, 13) 0%, darken($secondary, 10) 100%);
+
+  &:hover {
+    background-image: linear-gradient(to right, lighten($primary, 18) 0%, darken($secondary, 8) 100%);
+  }
+
+  a {
+    text-decoration: none;
+    color: $white;
+  }
+
+  @media (min-width: 576px) {
+    font-size: 40px;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 50px;
+  }
+}

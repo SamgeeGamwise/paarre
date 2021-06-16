@@ -1,9 +1,6 @@
-// @ is an alias to /src
-// import HelloWorld from '@/components/HelloWorld.vue';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
     name: 'Login',
-    // components: {
-    //   HelloWorld,
-    // },
-};
+    methods: {},
+});

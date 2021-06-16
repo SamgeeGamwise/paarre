@@ -1,17 +1,24 @@
 import { createStore } from 'vuex';
-import { RootState } from '../types';
-
+import { RootState } from "@/typescript/types";
 
 // Create a new store instance.
 const store = createStore({
-    state() {
+    state(): RootState {
         return {
-            count: 0
+            user: {
+                isAuthenticated: false,
+                id: 0,
+                firstName: "",
+                lastName: "",
+                email: "",
+            }
         }
+
     },
     mutations: {
-        increment(state: RootState) {
-            state.count++
+        authenticated() {
+            store.state.user.isAuthenticated = !store.state.user.isAuthenticated;
+            console.log(store.state.user.isAuthenticated)
         }
     }
 })

@@ -4,5 +4,5 @@
   </div>
 </template>
 
-<script lang="ts"></script>
+<script lang="ts" src="./About.ts" />
 <style lang="scss" src="./About.scss" />
