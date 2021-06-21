@@ -1,4 +1,3 @@
-import User from '@/models/User';
 import { defineComponent } from 'vue';
 import Footer from '../_components/Footer/Footer.vue';
 
@@ -20,10 +19,6 @@ export default defineComponent({
     },
     mounted() { },
     methods: {
-        login() {
-            this.$store.dispatch('login').then((user: User) => {
-                if (user) this.$router.push('/');
-            })
-        },
+
     },
 });

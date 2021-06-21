@@ -8,6 +8,9 @@ const mutations = {
     },
     clearUser() {
         store.state.user = new User();
+    },
+    updateUser(state: State, newUser: User) {
+        store.state.user = newUser;
     }
 }
 

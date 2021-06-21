@@ -74,15 +74,17 @@
   padding-right: 40px;
   border-radius: 50px;
   border-width: 0;
-  background-image: linear-gradient(to right, lighten($primary, 13) 0%, darken($secondary, 10) 100%);
+  background-image: linear-gradient(to right, lighten($primary, 8) 0%, darken($secondary, 10) 100%);
+  color: $white;
+
+  a {
+    color: $white;
+    text-decoration: none;
+  }
 
   &:hover {
     background-image: linear-gradient(to right, lighten($primary, 18) 0%, darken($secondary, 8) 100%);
-  }
-
-  a {
-    text-decoration: none;
-    color: $white;
+    color: $light;
   }
 
   @media (min-width: 576px) {

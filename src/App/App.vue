@@ -1,5 +1,5 @@
 <template>
-  <Nav v-if="isAuthenticated" />
+  <Nav v-if="!isLanding" />
   <router-view />
   <Footer />
 </template>

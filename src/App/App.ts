@@ -9,8 +9,8 @@ export default defineComponent({
         Footer,
     },
     computed: {
-        isAuthenticated(): boolean {
-            return this.$store.state.user.isAuthenticated;
+        isLanding(): boolean {
+            return this.$route.name === "Landing";
         },
     },
 });

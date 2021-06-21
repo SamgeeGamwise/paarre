@@ -1,6 +1,7 @@
 <template>
-  <h1>Home</h1>
-  <button v-on:click="logout">Logout</button>
+  <div class="container">
+    <h1>Home</h1>
+  </div>
 </template>
 
 <script lang="ts" src="./Home.ts" />

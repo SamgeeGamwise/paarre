@@ -3,8 +3,8 @@
     <span class="bannerText">
       <p class="bannerTextHeader">Paarre</p>
       <p class="bannerTextBody">Couples Find Couples</p>
-      <button type="button" class="btn btn-light bannerButton" v-on:click="login">
-        Get Started!
+      <button type="button" class="btn btn-light bannerButton">
+        <router-link to="/login">Get Started!</router-link>
       </button>
     </span>
     <picture class="banner">

@@ -1,10 +1,15 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom">
     <div class="container-fluid">
-      <router-link to="/" class="navbar-brand">
-        <img :src="constants.LOGO" height="50px" alt="Paarre" />
+      <router-link :to="isAuthenticated ? '/' : '/landing'" class="navbar-brand">
+        <img :src="constants.LOGO" style="height: 50px;" alt="Paarre" />
       </router-link>
-      <input type="text" class="d-none d-md-block globalSearch" placeholder="Search" />
+      <input
+        type="text"
+        class="d-none d-md-block globalSearch"
+        placeholder="Search"
+        v-if="isAuthenticated"
+      />
       <button
         class="navbar-toggler"
         type="button"
@@ -13,28 +18,39 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav  ml-auto">
+      <div class="collapse navbar-collapse flex-row-reverse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link">About</a>
+            <router-link to="/about" class="nav-link">About</router-link>
           </li>
-          <li class="nav-item dropdown">
+          <li class="nav-item" v-if="!isAuthenticated">
+            <router-link to="/login" class="nav-link">Login</router-link>
+          </li>
+          <li class="nav-item" v-if="!isAuthenticated">
+            <router-link to="/register" class="nav-link">Register</router-link>
+          </li>
+          <li class="nav-item dropdown" v-if="isAuthenticated">
             <a
               class="nav-link dropdown-toggle"
               id="navbarDropdownMenuLink"
               role="button"
               data-bs-toggle="dropdown"
             >
-              Account
+              {{ user ? user.firstName : 'Account' }}
             </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <ul
+              class="dropdown-menu"
+              style="right: 0; left: auto;"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
               <li>
-                <router-link to="/profile" class="dropdown-item lead links">
+                <router-link to="/profile" class="dropdown-item links">
                   Profile
                 </router-link>
               </li>
+              <div class="dropdown-divider"></div>
               <li>
-                <div v-on:click="logout" class="dropdown-item lead links">Logout</div>
+                <div v-on:click="logout" class="dropdown-item links">Logout</div>
               </li>
             </ul>
           </li>

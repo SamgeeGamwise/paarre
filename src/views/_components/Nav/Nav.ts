@@ -8,6 +8,7 @@ export default defineComponent({
             constants: {
                 LOGO: logo,
             },
+            user: this.$store.getters.getUser,
         }
     },
     methods: {
@@ -15,6 +16,11 @@ export default defineComponent({
             this.$store.commit('clearUser');
             localStorage.removeItem('jwt');
             this.$router.push({ name: 'Landing' });
+        },
+    },
+    computed: {
+        isAuthenticated(): boolean {
+            return this.$store.getters.getUser.isAuthenticated;
         },
     },
 });

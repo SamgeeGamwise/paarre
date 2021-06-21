@@ -2,9 +2,9 @@ import User from '@/models/User';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-    name: 'Login',
+    name: 'Register',
     methods: {
-        login() {
+        register() {
             this.$store.dispatch('login').then((user: User) => {
                 if (user) this.$router.push('/');
             })
