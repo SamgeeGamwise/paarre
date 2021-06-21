@@ -4,7 +4,7 @@ export default defineComponent({
     name: 'Home',
     methods: {
         logout() {
-            this.$store.commit('authenticated');
+            this.$store.commit('clearUser');
             localStorage.removeItem('jwt');
             this.$router.push({ name: 'Landing' });
         },

@@ -3,4 +3,4 @@
 </template>
 
 <script lang="ts" src="./Login.ts" />
-<style lang="scss" src="./Login.scss" />
+<style lang="scss" src="./Login.scss" scoped />

@@ -1,3 +1,4 @@
+import User from '@/models/User';
 import { defineComponent } from 'vue';
 import Footer from '../_components/Footer/Footer.vue';
 
@@ -19,10 +20,10 @@ export default defineComponent({
     },
     mounted() { },
     methods: {
-        authenticate() {
-            this.$store.commit('authenticated');
-            localStorage.setItem('jwt', 'Not Null');
-            this.$router.push({ name: 'Home' });
+        login() {
+            this.$store.dispatch('login').then((user: User) => {
+                if (user) this.$router.push('/');
+            })
         },
     },
 });

@@ -5,4 +5,4 @@
 </template>
 
 <script lang="ts" src="./About.ts" />
-<style lang="scss" src="./About.scss" />
+<style lang="scss" src="./About.scss" scoped />

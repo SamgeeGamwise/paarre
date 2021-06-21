@@ -1,5 +1,8 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from "@/views/Home/Home.vue"
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import store from "@/store/";
+import User from "@/models/User";
+import Home from "@/views/Home/Home.vue";
+import Profile from "@/views/Profile/Profile.vue";
 import Landing from '@/views/Landing/Landing.vue';
 import Login from '@/views/Login/Login.vue';
 import Admin from '@/views/Admin/Admin.vue';
@@ -9,6 +12,14 @@ const routes: Array<RouteRecordRaw> = [
     path: '/',
     name: 'Home',
     component: Home,
+    meta: {
+      authed: true
+    }
+  },
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile,
     meta: {
       authed: true
     }
@@ -54,23 +65,33 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
+  const stringUser = localStorage.getItem('jwt') || "";
+  let user: User;
+
   if (to.matched.some(record => record.meta.authed)) {
-    if (localStorage.getItem('jwt') == null) {
+    if (!stringUser) {
       next({
         name: 'Landing',
         params: { nextUrl: to.fullPath }
       })
     } else {
-      const user = JSON.parse(localStorage.getItem('user') || '{"is_admin":0}')
-      if (to.matched.some(record => record.meta.is_admin)) {
-        if (user.is_admin == 1) {
-          next()
+      user = JSON.parse(stringUser);
+
+      if (to.matched.some(record => record.meta.isAdmin)) {
+        if (user.isAdmin) {
+          store.dispatch('login').then((newUser: User) => {
+            newUser ? next() : next({ name: 'Landing' })
+          })
         }
         else {
-          next({ name: 'Home' })
+          store.dispatch('login').then((newUser: User) => {
+            newUser ? next({ name: 'Home' }) : next({ name: 'Landing' })
+          })
         }
       } else {
-        next()
+        store.dispatch('login').then((newUser: User) => {
+          newUser ? next() : next({ name: 'Landing' })
+        })
       }
     }
   } else if (to.matched.some(record => record.meta.guest)) {

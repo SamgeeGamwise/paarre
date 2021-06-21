@@ -1,5 +1,48 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <router-link to="/" class="navbar-brand">
+        <img :src="constants.LOGO" height="50px" alt="Paarre" />
+      </router-link>
+      <input type="text" class="d-none d-md-block globalSearch" placeholder="Search" />
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNavDropdown"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav  ml-auto">
+          <li class="nav-item">
+            <a class="nav-link">About</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle"
+              id="navbarDropdownMenuLink"
+              role="button"
+              data-bs-toggle="dropdown"
+            >
+              Account
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <li>
+                <router-link to="/profile" class="dropdown-item lead links">
+                  Profile
+                </router-link>
+              </li>
+              <li>
+                <div v-on:click="logout" class="dropdown-item lead links">Logout</div>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom">
     <div class="container-fluid">
       <router-link to="/" class="navbar-brand">
         <img src="/images/paarre-v4.png" height="50px" alt="Paarre" />
@@ -17,9 +60,9 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-          <!-- <li class="nav-item d-md-none">
+          <li class="nav-item d-md-none">
             <router-link to="/profile" class="nav-link lead links">Profile</router-link>
-          </li> -->
+          </li>
           <li class="nav-item  d-md-none">
             <div v-on:click="logout" class="nav-link lead links">Logout</div>
           </li>
@@ -34,7 +77,7 @@
               Account
             </a>
             <div class="dropdown-menu">
-              <!-- <router-link to="/profile" class="dropdown-item lead links">Profile</router-link> -->
+              <router-link to="/profile" class="dropdown-item lead links">Profile</router-link>
               <div class="dropdown-divider" />
               <div v-on:click="logout" class="dropdown-item lead links">Logout</div>
             </div>
@@ -42,7 +85,7 @@
         </ul>
       </div>
     </div>
-  </nav>
+  </nav> -->
   <!-- 
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
