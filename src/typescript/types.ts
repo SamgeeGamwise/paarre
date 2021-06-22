@@ -2,6 +2,7 @@ export interface AuthServerResponse {
     data: boolean
 }
 
-export interface ServerData {
-
+export interface Coordinates {
+    latitude: number,
+    longitude: number
 }
