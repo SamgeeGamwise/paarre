@@ -1,15 +1,16 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import store from "@/store/";
-import User from "@/models/User";
+import Account from '@/models/Account';
 
 // Views
 import Home from "@/views/Home/Home.vue";
-import Profile from "@/views/Profile/Profile.vue";
 import Landing from '@/views/Landing/Landing.vue';
-import Login from '@/views/Login/Login.vue';
 import Admin from '@/views/Admin/Admin.vue';
 import About from "@/views/About/About.vue";
-import Register from '@/views/Register/Register.vue';
+import UserView from "@/views/User/User.vue";
+import Profile from "@/views/User/Profile/Profile.vue";
+import Login from '@/views/User/Login/Login.vue';
+import Register from '@/views/User/Register/Register.vue';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -21,8 +22,16 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: '/profile',
-    name: 'Profile',
+    path: '/user/:id',
+    name: 'User',
+    component: UserView,
+    meta: {
+      authed: true
+    }
+  },
+  {
+    path: '/user/:id/profile',
+    name: "Profile",
     component: Profile,
     meta: {
       authed: true
@@ -37,7 +46,7 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: '/login',
+    path: '/user/login',
     name: 'Login',
     component: Login,
     meta: {
@@ -45,7 +54,7 @@ const routes: Array<RouteRecordRaw> = [
     }
   },
   {
-    path: '/register',
+    path: '/user/register',
     name: 'Register',
     component: Register,
     meta: {
@@ -68,6 +77,10 @@ const routes: Array<RouteRecordRaw> = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: About
+  },
+  {
+    path: '/:catchAll(.*)',
+    redirect: '/',
   }
 ]
 
@@ -77,45 +90,45 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const savedUser = localStorage.getItem('jwt') || "";
-  let user: User;
+  const savedAccount = localStorage.getItem('jwt') || "";
+
+  // let account = JSON.parse(savedAccount);
+  const accountIsAdmin = false;
+
 
   // If authed route
   if (to.matched.some(record => record.meta.authed)) {
-    // If no saved user
-    if (!savedUser) {
+    if (!savedAccount) {
       next({
         name: 'Landing',
         params: { nextUrl: to.fullPath }
       })
-      // Else if saved user
-    } else {
-      user = JSON.parse(savedUser);
-      // If also Admin Route
-      if (to.matched.some(record => record.meta.isAdmin)) {
-        // If user is admin
-        if (user.isAdmin) {
-          store.dispatch('login').then((newUser: User) => {
-            newUser ? next() : next({ name: 'Landing' })
-          })
-        }
-        // If user is not admin
-        else {
-          store.dispatch('login').then((newUser: User) => {
-            newUser ? next({ name: 'Home' }) : next({ name: 'Landing' })
-          })
-        }
-        // If just authed route
-      } else {
-        store.dispatch('login').then((newUser: User) => {
-          newUser ? next() : next({ name: 'Landing' })
+    }
+    // If no saved user
+    // If also Admin Route
+    if (to.matched.some(record => record.meta.isAdmin)) {
+      // If user is admin
+      if (accountIsAdmin) {
+        store.dispatch('login').then((newAccount: Account) => {
+          newAccount ? next() : next({ name: 'Landing' })
         })
       }
+      // If user is not admin
+      else {
+        store.dispatch('login').then((newAccount: Account) => {
+          newAccount ? next({ name: 'Home' }) : next({ name: 'Landing' })
+        })
+      }
+      // If just authed route
+    } else {
+      store.dispatch('login').then((newAccount: Account) => {
+        newAccount ? next() : next({ name: 'Landing' })
+      })
     }
     // If route is only for guests
   } else if (to.matched.some(record => record.meta.guest)) {
     // If no saved user
-    if (!savedUser) {
+    if (!savedAccount) {
       next()
     }
     // If saved user

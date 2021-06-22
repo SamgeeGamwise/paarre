@@ -8,19 +8,19 @@ export default defineComponent({
             constants: {
                 LOGO: logo,
             },
-            user: this.$store.getters.getUser,
+            account: this.$store.getters.getAccount,
         }
     },
     methods: {
         logout() {
-            this.$store.commit('clearUser');
+            this.$store.commit('clearAccount');
             localStorage.removeItem('jwt');
             this.$router.push({ name: 'Landing' });
         },
     },
     computed: {
         isAuthenticated(): boolean {
-            return this.$store.getters.getUser.isAuthenticated;
+            return this.$store.getters.getAccount.isAuthenticated;
         },
     },
 });

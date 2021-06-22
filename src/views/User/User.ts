@@ -3,11 +3,10 @@ import { getDistance, getLocation } from "@/geolocation/index";
 import { Coordinates } from '@/typescript/types';
 
 export default defineComponent({
-    name: 'Profile',
+    name: 'User',
     data() {
         return {
-            user: { ...this.$store.getters.getUser },
-            userForm: { ...this.$store.getters.getUser },
+            account: { ...this.$store.getters.getAccount },
         }
     },
     mounted: () => {
@@ -20,10 +19,13 @@ export default defineComponent({
         // })
     },
     methods: {
-        updateUser(e: Event) {
+        updateUsers(e: Event) {
             e.preventDefault();
-            this.$store.commit("updateUser", this.userForm);
-            this.user = { ... this.$store.getters.getUser };
+            this.$store.commit("updateUsers", [this.account.user1, this.account.user2]);
         },
+        updatePassword(e: Event) {
+            e.preventDefault();
+            console.log("Update Password!");
+        }
     },
 });

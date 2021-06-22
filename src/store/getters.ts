@@ -1,15 +1,16 @@
+import Account from "@/models/Account";
 import User from "@/models/User";
 import store from ".";
 
 const getters = {
-    userId(): number | null {
-        return store.state.user.id;
+    accountId(): number | null {
+        return store.state.account.id;
     },
     isAuthenticated(): boolean {
-        return store.state.user.isAuthenticated;
+        return store.state.account.isAuthenticated;
     },
-    getUser(): User {
-        return store.state.user;
+    getAccount(): Account {
+        return store.state.account;
     }
 }
 

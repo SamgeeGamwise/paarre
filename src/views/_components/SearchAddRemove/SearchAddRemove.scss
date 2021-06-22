@@ -1,0 +1,16 @@
+$min-height: 150px;
+
+.select {
+    min-height: $min-height;
+    &:read-only {
+        background-color: inherit;
+    }
+}
+
+.selected {
+    min-height: $min-height;
+
+    &:read-only {
+       background-color: inherit;
+   }
+}

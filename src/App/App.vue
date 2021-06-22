@@ -1,7 +1,7 @@
 <template>
   <Nav v-if="!isLanding" />
   <router-view />
-  <Footer />
+  <Footer v-if="isLanding" />
 </template>
 
 <script lang="ts" src="./App.ts" />

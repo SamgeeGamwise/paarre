@@ -1,5 +1,5 @@
-import User from "@/models/User"
+import Account from "@/models/Account"
 
 export default class State {
-    user: User = new User();
+    account: Account = new Account();
 }

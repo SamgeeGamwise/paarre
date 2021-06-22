@@ -3,7 +3,7 @@
     <h1>Register</h1>
     <button v-on:click="register">Register</button>
     <p>Already have an account?</p>
-    <router-link to="/login">Click here!</router-link>
+    <router-link to="/user/login">Click here!</router-link>
   </div>
 </template>
 

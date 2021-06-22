@@ -24,10 +24,10 @@
             <router-link to="/about" class="nav-link">About</router-link>
           </li>
           <li class="nav-item" v-if="!isAuthenticated">
-            <router-link to="/login" class="nav-link">Login</router-link>
+            <router-link to="/user/login" class="nav-link">Login</router-link>
           </li>
           <li class="nav-item" v-if="!isAuthenticated">
-            <router-link to="/register" class="nav-link">Register</router-link>
+            <router-link to="/user/register" class="nav-link">Register</router-link>
           </li>
           <li class="nav-item dropdown" v-if="isAuthenticated">
             <a
@@ -36,7 +36,9 @@
               role="button"
               data-bs-toggle="dropdown"
             >
-              {{ user ? user.firstName : 'Account' }}
+              {{
+                account ? account.user1.firstName + ' & ' + account.user2.firstName : 'Account'
+              }}
             </a>
             <ul
               class="dropdown-menu"
@@ -44,8 +46,16 @@
               aria-labelledby="navbarDropdownMenuLink"
             >
               <li>
-                <router-link to="/profile" class="dropdown-item links">
+                <router-link
+                  :to="'/user/' + account.id + '/profile/'"
+                  class="dropdown-item links"
+                >
                   Profile
+                </router-link>
+              </li>
+              <li>
+                <router-link :to="'/user/' + account.id" class="dropdown-item links">
+                  My Account
                 </router-link>
               </li>
               <div class="dropdown-divider"></div>

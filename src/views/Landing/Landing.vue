@@ -4,7 +4,7 @@
       <p class="bannerTextHeader">Paarre</p>
       <p class="bannerTextBody">Couples Find Couples</p>
       <button type="button" class="btn btn-light bannerButton">
-        <router-link to="/login">Get Started!</router-link>
+        <router-link to="/user/register">Get Started!</router-link>
       </button>
     </span>
     <picture class="banner">
