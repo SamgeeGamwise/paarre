@@ -1,6 +1,5 @@
 <template>
   <div class="form-group">
-    <h4>{{ title }}</h4>
     <input
       v-model="searchVal"
       v-on:change="search"
@@ -11,16 +10,26 @@
       <div class="col">
         <h6>Add new</h6>
         <select multiple readonly class="form-control select">
-          <option v-for="(item, key) in searchList" :key="key" v-on:dblclick="add(item)">
-            {{ item }}</option
+          <option
+            v-for="(item, key) in searchList"
+            :key="key"
+            :disabled="item.type === 'category'"
+            v-on:dblclick="add(item)"
+          >
+            {{ item.name }}</option
           >
         </select>
       </div>
       <div class="col">
         <h6>Remove</h6>
-        <select multiple readonly class="form-control selected">
-          <option v-for="(item, key) in returns" :key="key" v-on:dblclick="remove(item)">
-            {{ item }}
+        <select multiple readonly class="form-control select">
+          <option
+            v-for="(item, key) in $props.interests"
+            :key="key"
+            :disabled="item.type === 'category'"
+            v-on:dblclick="remove(item)"
+          >
+            {{ item.name }}
           </option>
         </select>
       </div>

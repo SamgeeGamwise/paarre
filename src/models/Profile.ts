@@ -1,6 +1,6 @@
-import Passions from "./Passions";
+import Interest from "./Interest";
 
 export default class Profile {
     details: string = "test";
-    passions: Passions = new Passions();
+    interests: Interest[] = [];
 }

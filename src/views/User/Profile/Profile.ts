@@ -1,6 +1,6 @@
 import { defineComponent } from 'vue';
 import SearchAddRemove from "@/views/_components/SearchAddRemove/SearchAddRemove.vue"
-import Passions from '@/models/Passions';
+import Interest from '@/models/Interest';
 import Account from '@/models/Account';
 import { getDistance, getLocation } from "@/geolocation/index";
 
@@ -9,23 +9,21 @@ export default defineComponent({
     data() {
         return {
             account: { ...this.$store.getters.getAccount } as Account,
-            passions: Passions.allPassions()
         }
     },
     components: {
         SearchAddRemove
     },
     mounted() {
-        this.passions.sports = this.passions.sports.filter((passion) => {
-            return !this.account.profile.passions.sports.includes(passion);
-        })
-
         // Google Maps API
         // getLocation().then((position: GeolocationPosition) => {
         //     console.log(position);
         // }).catch((err) => {
         //     console.log(err)
         // })
+    },
+    computed: {
+
     },
     methods: {
         updateProfile(e: Event) {

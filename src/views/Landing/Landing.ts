@@ -1,3 +1,4 @@
+import Interest from '@/models/Interest';
 import { defineComponent } from 'vue';
 import Footer from '../_components/Footer/Footer.vue';
 
@@ -17,7 +18,8 @@ export default defineComponent({
             },
         };
     },
-    mounted() { },
+    mounted() {
+    },
     methods: {
 
     },

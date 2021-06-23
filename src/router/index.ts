@@ -90,25 +90,27 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  const savedAccount = localStorage.getItem('jwt') || "";
+  const savedAccount: Account = JSON.parse(localStorage.getItem('jwt') || "{}");
+  const noUser: boolean = Object.keys(savedAccount).length === 0;
 
-  // let account = JSON.parse(savedAccount);
-  const accountIsAdmin = false;
-
+  if (!noUser) {
+    store.commit("setAccount", savedAccount);
+  }
 
   // If authed route
   if (to.matched.some(record => record.meta.authed)) {
-    if (!savedAccount) {
+    if (!savedAccount.isAuthenticated) {
       next({
         name: 'Landing',
         params: { nextUrl: to.fullPath }
       })
     }
+
     // If no saved user
     // If also Admin Route
     if (to.matched.some(record => record.meta.isAdmin)) {
       // If user is admin
-      if (accountIsAdmin) {
+      if (savedAccount.isAdmin) {
         store.dispatch('login').then((newAccount: Account) => {
           newAccount ? next() : next({ name: 'Landing' })
         })
@@ -128,7 +130,7 @@ router.beforeEach((to, from, next) => {
     // If route is only for guests
   } else if (to.matched.some(record => record.meta.guest)) {
     // If no saved user
-    if (!savedAccount) {
+    if (noUser) {
       next()
     }
     // If saved user

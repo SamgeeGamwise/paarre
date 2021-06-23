@@ -10,7 +10,8 @@ const getters = {
         return store.state.account.isAuthenticated;
     },
     getAccount(): Account {
-        return store.state.account;
+        const account: Account = JSON.parse(JSON.stringify(store.state.account));
+        return account;
     }
 }
 

@@ -1,33 +1,44 @@
+import Interest from '@/models/Interest';
+import { Passion, PassionListCategory } from '@/typescript/types';
+import { PropType } from 'vue';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
     name: 'SearchAddRemove',
-    props: ["title", "list", "returns"],
+    props: {
+        interests: { type: Array as PropType<Array<Interest>>, default: () => [] },
+    },
     data() {
         return {
             searchVal: '' as string,
-            searchList: [] as string[]
+            searchList: [] as Interest[]
         }
     },
+    mounted() {
+        this.search()
+    },
     methods: {
-        add(passion: string) {
-            this.$props.returns.push(passion);
-            const index = this.$props.list.indexOf(passion);
-
-            if (index !== -1) {
-                this.$props.list.splice(index, 1);
-                this.search();
-            }
+        add(addInterest: Interest) {
+            if (!this.$props.interests.find((interest: Interest) => {
+                return addInterest.name === interest.name;
+            })
+            )
+                this.$props.interests.push(new Interest(addInterest.name, addInterest.category, addInterest.type));
         },
-        remove(passion: string) {
-            const index = this.$props.returns.indexOf(passion);
+        remove(removeInterest: Interest) {
+            const index = this.$props.interests.findIndex((interest: Interest) => {
+                return interest === removeInterest;
+            });
+
             if (index !== -1)
-                this.$props.returns.splice(index, 1);
+                this.$props.interests.splice(index, 1);
         },
         search() {
-            this.searchList = this.$props.list.filter((passion: string) => {
-                return passion.toLowerCase().includes(this.searchVal.toLowerCase());
-            })
+            const iList: Interest[] = Interest.all().filter((interest: Interest) => {
+                return interest.name.toLowerCase().includes(this.searchVal.toLowerCase()) || interest.type === "category";
+            });
+
+            this.searchList = Interest.sort(iList);
         }
     }
 });

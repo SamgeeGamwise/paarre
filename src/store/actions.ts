@@ -9,7 +9,8 @@ const actions = {
     login({ commit }: { commit: Commit }) {
         return new Promise((resolve, reject) => {
             axios.get(api + "/api/user/auth", { params: { id: store.getters.accountId } }).then((res: AuthServerResponse) => {
-                localStorage.setItem('jwt', JSON.stringify(res.data));
+                // localStorage.setItem('jwt', JSON.stringify(res.data));
+
                 commit("authenticate", res.data);
                 resolve(res.data || false)
             }, (error: any) => {
