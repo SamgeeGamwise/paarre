@@ -9,9 +9,21 @@
       </small>
     </div>
     <form class="profile-form">
-      <h5 class="mb-3">First User</h5>
-      <hr />
       <div class="row">
+        <div class="col">
+          <h5 class="mb-3">Email Address</h5>
+          <div class="form-group mt-3">
+            <input
+              type="email"
+              class="form-control"
+              id="email1"
+              aria-describedby="emailHelp"
+              placeholder="Enter email"
+              v-model="account.email"
+            />
+          </div>
+        </div>
+        <h5 class="mt-4 mb-3">First User</h5>
         <div class="col">
           <div class="form-group">
             <label for="firstName1">First Name</label>
@@ -37,19 +49,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group mt-3">
-        <label for="email1">Email address</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email1"
-          aria-describedby="emailHelp"
-          placeholder="Enter email"
-          v-model="account.email"
-        />
-      </div>
-      <h5 class="mt-5 mb-3">Second User</h5>
-      <hr />
+      <h5 class="mt-4 mb-3">Second User</h5>
       <div class="row">
         <div class="col">
           <div class="form-group">
@@ -77,7 +77,7 @@
         </div>
       </div>
       <button class="btn btn-secondary mt-3" v-on:click="updateUsers">
-        Update
+        Update Account
       </button>
     </form>
     <form class="mt-5 password-form">
@@ -96,7 +96,7 @@
         />
       </div>
       <button class="btn btn-secondary mt-3" v-on:click="updatePassword">
-        Update
+        Update Password
       </button>
     </form>
   </div>

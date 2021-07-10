@@ -93,7 +93,7 @@ router.beforeEach(async (to, from, next) => {
   const sid: string = getCookie("connect.sid");
 
   if (sid && !store.getters.isAuthenticated) {
-    await store.dispatch("getUser")
+    await store.dispatch("getAccount")
   }
   // If authed route
   if (to.matched.some(record => (record.meta.authed))) {

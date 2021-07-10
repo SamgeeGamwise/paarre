@@ -1,6 +1,5 @@
 import { defineComponent } from 'vue';
 import SearchAddRemove from "@/views/_components/SearchAddRemove/SearchAddRemove.vue"
-import Interest from '@/models/Interest';
 import Account from '@/models/Account';
 import { getDistance, getLocation } from "@/geolocation/index";
 
@@ -28,7 +27,7 @@ export default defineComponent({
     methods: {
         updateProfile(e: Event) {
             e.preventDefault();
-            this.$store.commit("updateProfile", this.account.profile);
+            this.$store.dispatch("updateAccount", { endpoint: "profile", ...this.account.profile });
         },
     },
 });

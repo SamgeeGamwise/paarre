@@ -1,3 +1,5 @@
+import User from "@/models/User";
+
 export interface AuthServerResponse {
     data: any
 }
@@ -14,6 +16,21 @@ export interface Passion {
 export interface LoginPayload {
     email: string,
     password: string
+}
+
+export interface RegisterPayload {
+    firstName1: string,
+    lastName1: string,
+    firstName2: string,
+    lastName2: string,
+    email: string,
+    password: string
+}
+
+
+export interface UpdateAccount {
+    endpoint: string,
+    [x: string]: any
 }
 
 export interface PassionListCategory {

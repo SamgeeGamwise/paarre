@@ -7,6 +7,8 @@ export default defineComponent({
     data() {
         return {
             account: { ...this.$store.getters.getAccount },
+            password: "",
+            passwordConfirm: ""
         }
     },
     mounted: () => {
@@ -21,11 +23,13 @@ export default defineComponent({
     methods: {
         updateUsers(e: Event) {
             e.preventDefault();
-            this.$store.commit("updateUsers", [this.account.user1, this.account.user2]);
+            this.$store.dispatch("updateAccount", { endpoint: "users", email: this.account.email, user1: this.account.user1, user2: this.account.user2 });
         },
         updatePassword(e: Event) {
             e.preventDefault();
-            console.log("Update Password!");
+            if (this.password === this.passwordConfirm) {
+                this.$store.dispatch("updateAccount", { endpoint: "password", password: this.password });
+            }
         }
     },
 });
