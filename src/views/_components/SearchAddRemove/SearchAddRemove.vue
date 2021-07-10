@@ -1,11 +1,6 @@
 <template>
   <div class="form-group">
-    <input
-      v-model="searchVal"
-      v-on:change="search"
-      class="form-control"
-      placeholder="Search"
-    />
+    <input v-model="searchVal" v-on:keyup="search" class="form-control" placeholder="Search" />
     <div class="row mt-3">
       <div class="col">
         <h6>Add new</h6>

@@ -4,12 +4,12 @@
       <router-link :to="isAuthenticated ? '/' : '/landing'" class="navbar-brand">
         <img :src="constants.LOGO" style="height: 50px;" alt="Paarre" />
       </router-link>
-      <input
+      <!-- <input
         type="text"
         class="d-none d-md-block globalSearch"
         placeholder="Search"
         v-if="isAuthenticated"
-      />
+      /> -->
       <button
         class="navbar-toggler"
         type="button"

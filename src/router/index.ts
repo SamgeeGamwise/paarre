@@ -1,6 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import store from "@/store/";
-import Account from '@/models/Account';
 
 // Views
 import Home from "@/views/Home/Home.vue";
@@ -11,6 +10,7 @@ import UserView from "@/views/User/User.vue";
 import Profile from "@/views/User/Profile/Profile.vue";
 import Login from '@/views/User/Login/Login.vue';
 import Register from '@/views/User/Register/Register.vue';
+import { getCookie } from '@/store/util';
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -67,7 +67,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Admin,
     meta: {
       authed: true,
-      is_admin: true
+      isAdmin: true
     }
   },
   {
@@ -89,48 +89,31 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  const savedAccount: Account = JSON.parse(localStorage.getItem('jwt') || "{}");
-  const noUser: boolean = Object.keys(savedAccount).length === 0;
+router.beforeEach(async (to, from, next) => {
+  const sid: string = getCookie("connect.sid");
 
-  if (!noUser) {
-    store.commit("setAccount", savedAccount);
+  if (sid && !store.getters.isAuthenticated) {
+    await store.dispatch("getUser")
   }
-
   // If authed route
-  if (to.matched.some(record => record.meta.authed)) {
-    if (!savedAccount.isAuthenticated) {
-      next({
-        name: 'Landing',
-        params: { nextUrl: to.fullPath }
-      })
-    }
-
-    // If no saved user
+  if (to.matched.some(record => (record.meta.authed))) {
     // If also Admin Route
     if (to.matched.some(record => record.meta.isAdmin)) {
       // If user is admin
-      if (savedAccount.isAdmin) {
-        store.dispatch('login').then((newAccount: Account) => {
-          newAccount ? next() : next({ name: 'Landing' })
+      store.getters.isAuthenticated ?
+        store.getters.isAdmin ?
+          next() :
+          next({ name: 'Home' }) :
+        next({
+          name: 'Landing',
+          params: { nextUrl: to.fullPath }
         })
-      }
-      // If user is not admin
-      else {
-        store.dispatch('login').then((newAccount: Account) => {
-          newAccount ? next({ name: 'Home' }) : next({ name: 'Landing' })
-        })
-      }
-      // If just authed route
     } else {
-      store.dispatch('login').then((newAccount: Account) => {
-        newAccount ? next() : next({ name: 'Landing' })
-      })
+      store.getters.isAuthenticated ? next() : next({ name: 'Landing' })
     }
-    // If route is only for guests
   } else if (to.matched.some(record => record.meta.guest)) {
     // If no saved user
-    if (noUser) {
+    if (store.getters.accountId === 0) {
       next()
     }
     // If saved user

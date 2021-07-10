@@ -11,16 +11,19 @@ export default defineComponent({
             account: this.$store.getters.getAccount,
         }
     },
+    mounted: () => {
+        console.log("Nav!");
+
+    },
     methods: {
-        logout() {
-            this.$store.commit('clearAccount');
-            localStorage.removeItem('jwt');
+        async logout() {
+            await this.$store.dispatch('logout');
             this.$router.push({ name: 'Landing' });
         },
     },
     computed: {
         isAuthenticated(): boolean {
-            return this.$store.getters.getAccount.isAuthenticated;
+            return this.$store.getters.isAuthenticated;
         },
     },
 });

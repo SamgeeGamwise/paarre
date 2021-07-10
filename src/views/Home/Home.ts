@@ -1,13 +1,22 @@
 import { defineComponent } from 'vue';
+import users from "@/database/users";
+import Account from '@/models/Account';
 
 export default defineComponent({
     name: 'Home',
     data() {
         return {
-            user: this.$store.getters.getAccount,
+            account: this.$store.getters.getAccount,
+            users: [...users],
+            activeProfile: new Account() as Account
         }
     },
-    methods: {
+    computed: {
 
+    },
+    methods: {
+        setProfile(user: Account): void {
+            this.activeProfile = user
+        },
     },
 });

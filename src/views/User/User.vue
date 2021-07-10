@@ -45,7 +45,7 @@
           id="email1"
           aria-describedby="emailHelp"
           placeholder="Enter email"
-          v-model="account.user1.email"
+          v-model="account.email"
         />
       </div>
       <h5 class="mt-5 mb-3">Second User</h5>
@@ -76,18 +76,7 @@
           </div>
         </div>
       </div>
-      <div class="form-group mt-3">
-        <label for="email2">Email address (Optional)</label>
-        <input
-          type="email"
-          class="form-control"
-          id="email2"
-          aria-describedby="emailHelp"
-          placeholder="Enter email"
-          v-model="account.user2.email"
-        />
-      </div>
-      <button class="btn btn-primary mt-3" v-on:click="updateUsers">
+      <button class="btn btn-secondary mt-3" v-on:click="updateUsers">
         Update
       </button>
     </form>
@@ -106,7 +95,7 @@
           placeholder="Confirm Password"
         />
       </div>
-      <button class="btn btn-primary mt-3" v-on:click="updatePassword">
+      <button class="btn btn-secondary mt-3" v-on:click="updatePassword">
         Update
       </button>
     </form>

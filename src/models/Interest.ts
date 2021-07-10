@@ -1,7 +1,9 @@
-import { Passion, PassionListCategory } from "@/typescript/types";
+import { ServerResponse } from "@/typescript/types";
+import axios, { AxiosResponse } from "axios";
+
+const url = "http://localhost:3000/api/interests";
 
 export default class Interest {
-
     name: string;
     category: string;
     type: string;
@@ -14,28 +16,9 @@ export default class Interest {
     }
 
 
-    static all(): Interest[] {
-        return [
-            { name: "Sports", category: "Sports", type: "category" },
-            { name: "Outdoors", category: "Sports", type: "value" },
-            { name: "Working Out", category: "Sports", type: "value" },
-            { name: "Hiking", category: "Sports", type: "value" },
-            { name: "Yoga", category: "Sports", type: "value" },
-            { name: "Swimming", category: "Sports", type: "value" },
-            { name: "Biking", category: "Sports", type: "value" },
-            { name: "Walking", category: "Sports", type: "value" },
-            { name: "Running", category: "Sports", type: "value" },
-            { name: "Arts", category: "Arts", type: "category" },
-            { name: "Painting", category: "Arts", type: "value" },
-            { name: "Sculpting", category: "Arts", type: "value" },
-            { name: "Hobbies", category: "Hobbies", type: "category" },
-            { name: "Movies", category: "Hobbies", type: "value" },
-            { name: "Volunteering", category: "Hobbies", type: "value" },
-            { name: "Video Games", category: "Hobbies", type: "value" },
-            { name: "Card Games", category: "Hobbies", type: "value" },
-            { name: "Board Games", category: "Hobbies", type: "value" },
-
-        ]
+    static async all(): Promise<Interest[]> {
+        const interests = await (await axios.get<ServerResponse<Interest[]>>(url)).data.data;
+        return interests;
     }
 
     static allCategories(interests: Interest[]): string[] {
@@ -51,7 +34,7 @@ export default class Interest {
     }
 
     static sort(interests: Interest[]): Interest[] {
-        const categories = Interest.allCategories(Interest.all());
+        const categories = Interest.allCategories(interests);
         interests = interests.filter((interest: Interest) => {
             return interest.type === "value";
         });

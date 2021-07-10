@@ -1,5 +1,4 @@
 import Interest from '@/models/Interest';
-import { Passion, PassionListCategory } from '@/typescript/types';
 import { PropType } from 'vue';
 import { defineComponent } from 'vue';
 
@@ -11,10 +10,12 @@ export default defineComponent({
     data() {
         return {
             searchVal: '' as string,
-            searchList: [] as Interest[]
+            searchList: [] as Interest[],
+            iList: [] as Interest[]
         }
     },
-    mounted() {
+    async mounted() {
+        this.iList = await Interest.all();
         this.search()
     },
     methods: {
@@ -34,11 +35,9 @@ export default defineComponent({
                 this.$props.interests.splice(index, 1);
         },
         search() {
-            const iList: Interest[] = Interest.all().filter((interest: Interest) => {
+            this.searchList = Interest.sort(this.iList.filter((interest: Interest) => {
                 return interest.name.toLowerCase().includes(this.searchVal.toLowerCase()) || interest.type === "category";
-            });
-
-            this.searchList = Interest.sort(iList);
+            }));
         }
     }
 });

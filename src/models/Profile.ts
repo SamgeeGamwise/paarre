@@ -1,6 +1,6 @@
 import Interest from "./Interest";
 
 export default class Profile {
-    details: string = "test";
+    details: string = "";
     interests: Interest[] = [];
 }
