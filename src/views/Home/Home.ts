@@ -1,5 +1,4 @@
 import { defineComponent } from 'vue';
-import users from "@/database/users";
 import Account from '@/models/Account';
 
 export default defineComponent({
@@ -7,9 +6,12 @@ export default defineComponent({
     data() {
         return {
             account: this.$store.getters.getAccount,
-            users: [...users],
+            users: [],
             activeProfile: new Account() as Account
         }
+    },
+    mounted: async function () {
+        this.users = await this.$store.dispatch("getCouples")
     },
     computed: {
 
