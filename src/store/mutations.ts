@@ -18,6 +18,9 @@ const mutations = {
     clearAccount(state: State) {
         deleteCookie("connect.sid", "/", "localhost");
         state.account = new Account();
+    },
+    setLoading(state: State, bool: boolean) {
+        state.isLoading = bool;
     }
 }
 

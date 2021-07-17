@@ -26,8 +26,14 @@ export default defineComponent({
     },
     methods: {
         updateProfile(e: Event) {
+            this.$store.commit("setLoading", true);
             e.preventDefault();
-            this.$store.dispatch("updateAccount", { endpoint: "profile", ...this.account.profile });
+            this.$store.dispatch("updateAccount", { endpoint: "profile", details: this.account.profile.details });
+            this.$store.commit("setLoading", false);
+        },
+        updateInterests(e: Event) {
+            e.preventDefault();
+            this.$store.dispatch("updateAccount", { endpoint: "interests", interests: this.account.profile.interests });
         },
     },
 });

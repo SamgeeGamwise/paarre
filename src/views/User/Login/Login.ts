@@ -7,17 +7,20 @@ export default defineComponent({
     data() {
         return {
             email: "",
-            password: ""
+            password: "",
+            submit: false,
         }
     },
     methods: {
         login(e: Event) {
-            console.log("login!")
+            this.$store.commit("setLoading", true);
             e.preventDefault();
+            this.submit = true;
             const payload: LoginPayload = { email: this.email, password: this.password }
             this.$store.dispatch('login', payload).then((account: Account) => {
                 this.email = "";
                 this.password = "";
+                this.$store.commit("setLoading", false);
                 if (account) this.$router.push('/');
             })
         },

@@ -3,4 +3,5 @@ import Account from "@/models/Account"
 export default class State {
     account: Account = new Account();
     isAuthenticated: boolean = false;
+    isLoading: boolean = false;
 }

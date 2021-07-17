@@ -8,6 +8,11 @@ export default defineComponent({
         Nav,
         Footer,
     },
+    data() {
+        return {
+            isLoading: this.$store.getters.isLoading
+        }
+    },
     computed: {
         isLanding(): boolean {
             return this.$route.name === "Landing";

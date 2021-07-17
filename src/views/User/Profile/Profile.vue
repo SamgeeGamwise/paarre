@@ -21,9 +21,49 @@
           v-model="account.profile.details"
         />
       </div>
-      <h2 class="mt-4">Interests</h2>
-      <SearchAddRemove :interests="account.profile.interests" class="mt-3" />
+      <div class="form-group mt-3">
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#interestsModel"
+        >
+          Edit Interests
+        </button>
+      </div>
     </form>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="interestsModel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Modify your interests</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <SearchAddRemove :interests="account.profile.interests" class="mt-3" />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+            Close
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-dismiss="modal"
+            v-on:click="updateInterests"
+          >
+            Save changes
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

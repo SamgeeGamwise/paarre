@@ -11,12 +11,12 @@
     <form class="profile-form">
       <div class="row">
         <div class="col">
-          <h5 class="mb-3">Email Address</h5>
           <div class="form-group mt-3">
+            <label for="userEmail">Email Address</label>
             <input
               type="email"
               class="form-control"
-              id="email1"
+              id="userEmail"
               aria-describedby="emailHelp"
               placeholder="Enter email"
               v-model="account.email"
@@ -25,25 +25,18 @@
         </div>
         <h5 class="mt-4 mb-3">First User</h5>
         <div class="col">
-          <div class="form-group">
-            <label for="firstName1">First Name</label>
+          <div class="input-group">
+            <span class="input-group-text">First and last name</span>
             <input
               type="text"
+              aria-label="First name"
               class="form-control"
-              id="firstName1"
-              placeholder="First name"
               v-model="account.user1.firstName"
             />
-          </div>
-        </div>
-        <div class="col">
-          <div class="form-group">
-            <label for="lastName1">Last Name</label>
             <input
               type="text"
+              aria-label="Last name"
               class="form-control"
-              id="lastName1"
-              placeholder="Last name"
               v-model="account.user1.lastName"
             />
           </div>
@@ -52,25 +45,18 @@
       <h5 class="mt-4 mb-3">Second User</h5>
       <div class="row">
         <div class="col">
-          <div class="form-group">
-            <label for="firstName2">First Name</label>
+          <div class="input-group">
+            <span class="input-group-text">First and last name</span>
             <input
               type="text"
+              aria-label="First name"
               class="form-control"
-              id="firstName2"
-              placeholder="First name"
               v-model="account.user2.firstName"
             />
-          </div>
-        </div>
-        <div class="col">
-          <div class="form-group">
-            <label for="lastName2">Last Name</label>
             <input
               type="text"
+              aria-label="Last name"
               class="form-control"
-              id="lastName2"
-              placeholder="Last name"
               v-model="account.user2.lastName"
             />
           </div>
@@ -84,7 +70,13 @@
       <h3>Update Password</h3>
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Password" />
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Password"
+          v-model="password"
+        />
       </div>
       <div class="form-group mt-3">
         <label for="confirmPassword">Confirm Password</label>
@@ -93,6 +85,7 @@
           class="form-control"
           id="confirmPassword"
           placeholder="Confirm Password"
+          v-model="passwordConfirm"
         />
       </div>
       <button class="btn btn-secondary mt-3" v-on:click="updatePassword">

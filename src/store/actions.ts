@@ -21,6 +21,14 @@ const actions = {
             }), err(reject)
         });
     },
+    getCouples({ commit }: { commit: Commit }) {
+        return new Promise((resolve, reject) => {
+            axios.get(api + "/api/account/all", { withCredentials: true }).then((res: AuthServerResponse) => {
+                const accounts = res.data.data
+                resolve(accounts)
+            }), err(reject)
+        });
+    },
     // POST
     login({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }, payload: LoginPayload) {
         return new Promise((resolve, reject) => {

@@ -11,6 +11,9 @@ const getters = {
     isAdmin(): boolean {
         return store.state.account.isAdmin;
     },
+    isLoading(): boolean {
+        return store.state.isLoading
+    },
     getAccount(): Account {
         return store.state.account;
     }
