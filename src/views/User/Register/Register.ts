@@ -34,12 +34,6 @@ export default defineComponent({
                     lastName2: this.lastName2
                 }
                 this.$store.dispatch('register', payload).then((account: Account) => {
-                    this.email = "";
-                    this.password = "";
-                    this.firstName1 = "";
-                    this.lastName1 = "";
-                    this.firstName2 = "";
-                    this.lastName2 = "";
                     this.$store.commit("setLoading", false);
                     if (account) this.$router.push('/');
                 })

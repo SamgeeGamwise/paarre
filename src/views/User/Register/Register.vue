@@ -57,7 +57,7 @@
               Passwords must match.
             </div>
           </div>
-          <div class="row" v-if="showFirst">
+          <div class="row">
             <div class="col-12">
               <h4>First User</h4>
             </div>
@@ -88,7 +88,7 @@
               </div>
             </div>
           </div>
-          <div class="row" v-if="showSecond">
+          <div class="row">
             <div class="col-12">
               <h4>Second User</h4>
             </div>
@@ -119,10 +119,7 @@
               </div>
             </div>
           </div>
-          <button class="btn btn-primary" v-on:click="show" v-if="!showSecond">
-            Next
-          </button>
-          <button type="submit" class="btn btn-primary btn-lg" v-if="showFirst && showSecond">
+          <button type="submit" class="btn btn-primary btn-lg">
             Register
           </button>
         </form>

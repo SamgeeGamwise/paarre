@@ -18,8 +18,6 @@ export default defineComponent({
             this.submit = true;
             const payload: LoginPayload = { email: this.email, password: this.password }
             this.$store.dispatch('login', payload).then((account: Account) => {
-                this.email = "";
-                this.password = "";
                 this.$store.commit("setLoading", false);
                 if (account) this.$router.push('/');
             })

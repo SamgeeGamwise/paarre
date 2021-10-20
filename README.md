@@ -1,41 +1,45 @@
-# vuex-test
+# To run locally
 
-## Project setup
+1. Clone this repository
 
-```
-npm install
-```
+2. `npm install`
 
-### Compiles and hot-reloads for development
+3. `npm run serve`
 
-```
-npm run serve
-```
+# Code Overview
 
-### Compiles and minifies for production
+## Technologies
 
-```
-npm run build
-```
+- [Typescript](https://www.typescriptlang.org/) - Add strong typing to JavaScript
 
-### Lints and fixes files
+- [Vue.js 3](https://v3.vuejs.org/) - JavaScript Framework for web application
 
-```
-npm run lint
-```
+- [Vuex](https://vuex.vuejs.org/) - State Management for Vue
 
-### Customize configuration
+- [Vue Router](https://router.vuejs.org/) - Router for Vue to create a Single Page Applications
 
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- [SCSS](https://sass-lang.com/documentation/syntax) - CSS pre-processor to ensure my sanity
 
-### Vue Router
+## Application Structure
 
-https://router.vuejs.org/guide/
+- `main.ts` - Creates app and mounts
 
-### Vuex
+- `App/` - Contains the application layout
 
-https://next.vuex.vuejs.org/guide/
+- `models/` - Contains application models
 
-### Bootstrap-Vue
+- `router/` - Contains the Vue Router configuration
 
-https://bootstrap-vue.org/docs
+- `store/` - This folder contains the route definitions for our API
+
+  - `actions.ts` - Vuex Actions to asynchronously trigger a mutation
+
+  - `getters.ts/` - Vuex Getters for retrieving store data
+
+  - `mutations.ts` - Vuex Mutations for modifying store data
+
+  - `state.ts/` - Vuex State to defines the store
+
+- `styles/` - Contains global .scss files
+
+- `views/` - Contains application views, .ts files, and .scss files
