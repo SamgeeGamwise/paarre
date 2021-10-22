@@ -12,7 +12,7 @@ const actions = {
     // GET
     getAccount({ commit }: { commit: Commit }) {
         return new Promise((resolve, reject) => {
-            axios.get("/api/account", { withCredentials: true }).then((res: AuthServerResponse) => {
+            axios.get("/account", { withCredentials: true }).then((res: AuthServerResponse) => {
                 const account = res.data.data
                 commit("setAccount", account)
                 resolve(account)
@@ -21,7 +21,7 @@ const actions = {
     },
     getCouples({ commit }: { commit: Commit }) {
         return new Promise((resolve, reject) => {
-            axios.get("/api/account/all", { withCredentials: true }).then((res: AuthServerResponse) => {
+            axios.get("/account/all", { withCredentials: true }).then((res: AuthServerResponse) => {
                 const accounts = res.data.data
                 console.log(accounts)
 
@@ -32,7 +32,7 @@ const actions = {
     // POST
     login({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }, payload: LoginType) {
         return new Promise((resolve, reject) => {
-            axios("/api/auth/login", { method: "POST", data: payload, withCredentials: true }).then(() => {
+            axios("/auth/login", { method: "POST", data: payload, withCredentials: true }).then(() => {
                 dispatch("getAccount", { commit })
                 resolve(true)
             }), err(reject)
@@ -40,7 +40,7 @@ const actions = {
     },
     register({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }, payload: RegisterType) {
         return new Promise((resolve, reject) => {
-            axios("/api/auth/register", { method: "POST", data: payload, withCredentials: true }).then(() => {
+            axios("/auth/register", { method: "POST", data: payload, withCredentials: true }).then(() => {
                 dispatch("getAccount", { commit })
                 resolve(true)
             }), err(reject)
@@ -50,7 +50,7 @@ const actions = {
     updateAccount({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }, payload: UpdateAccount) {
         const { endpoint, ...data } = payload
         return new Promise((resolve, reject) => {
-            axios("/api/account/" + endpoint, { method: "PUT", data, withCredentials: true }).then(() => {
+            axios("/account" + endpoint, { method: "PUT", data, withCredentials: true }).then(() => {
                 dispatch("getAccount", { commit })
                 resolve(true)
             }), err(reject)
@@ -59,7 +59,7 @@ const actions = {
     // DELETE
     logout({ commit }: { commit: Commit }) {
         return new Promise((resolve, reject) => {
-            axios("/api/auth/logout", { method: "DELETE", withCredentials: true }).then(() => {
+            axios("/auth/logout", { method: "DELETE", withCredentials: true }).then(() => {
                 commit("clearAccount")
                 resolve(true)
             }), err(reject)

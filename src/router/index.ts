@@ -1,18 +1,19 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw, RouterOptions } from 'vue-router'
 import store from "@/store/"
+import { getCookie } from '@/store/util'
 
 // Views
 import Home from "@/views/Home/Home.vue"
 import Landing from '@/views/Landing/Landing.vue'
 import Admin from '@/views/Admin/Admin.vue'
 import About from "@/views/About/About.vue"
-import UserView from "@/views/User/User/User.vue"
+import User from "@/views/User/User/User.vue"
 import Profile from "@/views/User/Profile/Profile.vue"
 import Login from '@/views/User/Login/Login.vue'
 import Register from '@/views/User/Register/Register.vue'
-import { getCookie } from '@/store/util'
 
-const routes: Array<RouteRecordRaw> = [
+
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'Home',
@@ -24,7 +25,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/user/:id',
     name: 'User',
-    component: UserView,
+    component: User,
     meta: {
       authed: true
     }

@@ -47,7 +47,7 @@
           ></button>
         </div>
         <div class="modal-body">
-          <SearchAddRemove :interests="account.profile.interests" class="mt-3" />
+          <SearchAddRemove :interests="interests" class="mt-3" />
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">

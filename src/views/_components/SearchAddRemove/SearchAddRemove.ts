@@ -1,33 +1,32 @@
-import { Ref, ref, onMounted } from 'vue'
+import { Ref, ref, onMounted, PropType, defineComponent } from 'vue'
 import Interest from '@/models/Interest'
 
 export default {
-    setup(props: { interests: Interest[] } = { interests: [] }) {
+    setup(props: any) {
         const searchVal: Ref<string> = ref("")
         const searchList: Ref<Interest[]> = ref([])
         const iList: Ref<Interest[]> = ref([])
 
         const add = (addInterest: Interest) => {
-            if (!props.interests.find((interest: Interest) => {
-                return addInterest.name === interest.name
-            })
-            )
-                props.interests.push(new Interest(addInterest.name, addInterest.category, addInterest.type))
+            if (!props.interests.find((interest: Interest) => addInterest.name === interest.name)) {
+                const interest: Interest = addInterest
+                props.interests.push(interest)
+            }
         }
 
         const remove = (removeInterest: Interest) => {
-            const index = props.interests.findIndex((interest: Interest) => {
-                return interest === removeInterest
-            })
+            const index = props.interests.findIndex((interest: Interest) => interest === removeInterest)
 
-            if (index !== -1)
+            if (index !== -1) {
                 props.interests.splice(index, 1)
+            }
         }
 
         const search = () => {
-            searchList.value = Interest.sort(iList.value.filter((interest: Interest) => {
-                return interest.name.toLowerCase().includes(searchVal.value.toLowerCase()) || interest.type === "category"
-            }))
+            searchList.value = Interest.sort(
+                iList.value.filter(
+                    (interest: Interest) => interest.name.toLowerCase().includes(searchVal.value.toLowerCase()) || interest.type === "category")
+            )
         }
 
         onMounted(async () => {
@@ -36,6 +35,7 @@ export default {
         })
 
         return {
+            props,
             searchVal,
             searchList,
             iList,

@@ -4,6 +4,6 @@ import { RootState } from "@/types"
 
 declare module '@vue/runtime-core' {
     interface ComponentCustomProperties {
-        $store: store<RootState>
+        store: store<RootState>
     }
 }

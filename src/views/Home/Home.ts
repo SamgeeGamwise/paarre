@@ -15,7 +15,7 @@ export default {
         const users: Ref<Account[]> = ref([])
         const activeProfile: Ref<Account> = ref(new Account())
         const loaded: Ref<boolean> = ref(false)
-
+        console.log(store)
         const setProfile = (user: Account): void => {
             activeProfile.value = user
         }

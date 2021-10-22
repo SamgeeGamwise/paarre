@@ -19,7 +19,7 @@
         <h6>Remove</h6>
         <select multiple readonly class="form-control select">
           <option
-            v-for="(item, key) in $props.interests"
+            v-for="(item, key) in props.interests"
             :key="key"
             :disabled="item.type === 'category'"
             v-on:dblclick="remove(item)"

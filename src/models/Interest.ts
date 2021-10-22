@@ -1,23 +1,21 @@
 import { ServerResponse } from "@/typescript/types"
-import axios, { AxiosResponse } from "axios"
+import axios from "../services/axios"
 
-const url = "http://localhost:3000/api/interests"
 
 export default class Interest {
     name: string
     category: string
     type: string
 
-
-    constructor(name: string, category: string, type: string) {
-        this.name = name
-        this.category = category
-        this.type = type
+    constructor() {
+        this.name = ""
+        this.category = "category"
+        this.type = ""
     }
 
 
     static async all(): Promise<Interest[]> {
-        const interests = await (await axios.get<ServerResponse<Interest[]>>(url)).data.data
+        const interests = await (await axios.get<ServerResponse<Interest[]>>("/interests")).data.data
         return interests
     }
 
@@ -49,7 +47,7 @@ export default class Interest {
 
         interests.forEach((interest: Interest, index: number) => {
             if (categories.includes(interest.category)) {
-                interests.splice(index, 0, new Interest(interest.category, interest.category, "category"))
+                interests.splice(index, 0, new Interest())
                 categories.splice(categories.indexOf(interest.category), 1)
             }
         })
