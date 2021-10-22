@@ -1,12 +1,15 @@
-import Account from '@/models/Account';
-import User from '@/models/User';
-import { RegisterPayload } from '@/typescript/types';
-import { defineComponent } from 'vue';
+import Account from '@/models/Account'
+import { RegisterType, ErrorMessage } from '@/typescript/types'
+import { Router, useRouter } from 'vue-router'
+import State from '@/store/state'
+import { Ref, ref } from 'vue'
+import { Store, useStore } from 'vuex'
 
-export default defineComponent({
-    name: 'Register',
-    data() {
-        return {
+export default {
+    setup() {
+        const router: Router = useRouter()
+        const store: Store<State> = useStore()
+        const form: Ref<RegisterType> = ref({
             email: "",
             password: "",
             passwordConfirm: "",
@@ -14,36 +17,52 @@ export default defineComponent({
             lastName1: "",
             firstName2: "",
             lastName2: "",
-            submit: false,
-            showFirst: false,
-            showSecond: false,
-        }
-    },
-    methods: {
-        register(e: Event) {
-            this.$store.commit("setLoading", true);
-            e.preventDefault();
-            this.submit = true;
-            if (this.password === this.passwordConfirm) {
-                const payload: RegisterPayload = {
-                    email: this.email,
-                    password: this.password,
-                    firstName1: this.firstName1,
-                    lastName1: this.lastName1,
-                    firstName2: this.firstName2,
-                    lastName2: this.lastName2
-                }
-                this.$store.dispatch('register', payload).then((account: Account) => {
-                    this.$store.commit("setLoading", false);
-                    if (account) this.$router.push('/');
-                })
-            }
-        },
-        show(e: Event) {
+        })
+
+        const error: Ref<ErrorMessage> = ref({ show: false, message: "" })
+        const submit: Ref<boolean> = ref(false)
+        const showFirst: Ref<boolean> = ref(false)
+        const showSecond: Ref<boolean> = ref(false)
+
+        const register = (e: Event): void => {
             e.preventDefault()
-            if (this.email !== "" && this.password !== "" && this.passwordConfirm !== "") {
-                !this.showFirst ? this.showFirst = true : this.showSecond = true
+            error.value.show = false
+
+            if (form.value.password === form.value.passwordConfirm) {
+                store.commit("setLoading", true)
+                submit.value = true
+                const payload: RegisterType = {
+                    email: form.value.email,
+                    password: form.value.password,
+                    firstName1: form.value.firstName1,
+                    lastName1: form.value.lastName1,
+                    firstName2: form.value.firstName2,
+                    lastName2: form.value.lastName2,
+                }
+                store.dispatch('register', payload).then((account: Account) => {
+                    store.commit("setLoading", false)
+                    if (account) {
+                        router.push('/')
+                    } else {
+                        throw "Could not register account!"
+                    }
+                }).catch(err => {
+                    store.commit("setLoading", false)
+                    error.value.message = err
+                    error.value.show = true
+                })
+            } else {
+                store.commit("setLoading", false)
             }
         }
-    },
-});
+
+        return {
+            form,
+            submit,
+            showFirst,
+            showSecond,
+            error,
+            register
+        }
+    }
+}

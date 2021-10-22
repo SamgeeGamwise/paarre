@@ -1,6 +1,6 @@
 import { Commit, Dispatch } from "vuex"
 import axios from "../services/axios"
-import { AuthServerResponse, LoginPayload, RegisterPayload, UpdateAccount } from "@/typescript/types"
+import { AuthServerResponse, LoginType, RegisterType, UpdateAccount } from "@/typescript/types"
 
 function err(reject: any) {
     return (error: any) => {
@@ -30,7 +30,7 @@ const actions = {
         })
     },
     // POST
-    login({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }, payload: LoginPayload) {
+    login({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }, payload: LoginType) {
         return new Promise((resolve, reject) => {
             axios("/api/auth/login", { method: "POST", data: payload, withCredentials: true }).then(() => {
                 dispatch("getAccount", { commit })
@@ -38,7 +38,7 @@ const actions = {
             }), err(reject)
         })
     },
-    register({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }, payload: RegisterPayload) {
+    register({ commit, dispatch }: { commit: Commit, dispatch: Dispatch }, payload: RegisterType) {
         return new Promise((resolve, reject) => {
             axios("/api/auth/register", { method: "POST", data: payload, withCredentials: true }).then(() => {
                 dispatch("getAccount", { commit })

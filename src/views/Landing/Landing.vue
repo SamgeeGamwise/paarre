@@ -8,9 +8,13 @@
       </button>
     </span>
     <picture class="banner">
-      <source media="(min-width:768px)" :srcset="constants.FRIENDS" class="bannerImage" />
-      <source :srcset="constants.FRIENDS_MOBILE" class="bannerImage" />
-      <img :src="constants.FRIENDS_MOBILE" class="bannerImage" alt="Friends" />
+      <source
+        media="(min-width:768px)"
+        srcset="@/assets/images/friends3.jpg"
+        class="bannerImage"
+      />
+      <source srcset="@/assets/images/tall-friends.jpg" class="bannerImage" />
+      <img src="@/assets/images/tall-friends.jpg" class="bannerImage" alt="Friends" />
     </picture>
   </span>
   <Footer />

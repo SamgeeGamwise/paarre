@@ -1,39 +1,48 @@
-import { defineComponent } from 'vue'
+import { Ref, ref, onMounted } from 'vue'
+import { Store, useStore } from 'vuex'
+import State from '@/store/state'
 import SearchAddRemove from "@/views/_components/SearchAddRemove/SearchAddRemove.vue"
 import Account from '@/models/Account'
 import { getDistance, getLocation } from "@/services/geolocation/index"
 
-export default defineComponent({
-    name: 'Profile',
-    data() {
-        return {
-            account: { ...this.$store.getters.getAccount } as Account,
-        }
-    },
+export default {
     components: {
         SearchAddRemove
     },
-    mounted() {
-        // Google Maps API
-        // getLocation().then((position: GeolocationPosition) => {
-        //     console.log(position);
-        // }).catch((err) => {
-        //     console.log(err)
-        // })
-    },
-    computed: {
+    setup(props: any) {
+        onMounted(() => {
+            //  Google Maps API
+            getLocation().then((position: GeolocationPosition) => {
+                console.log(position)
+            }).catch((err) => {
+                console.log(err)
+            })
+        })
 
-    },
-    methods: {
-        updateProfile(e: Event) {
-            this.$store.commit("setLoading", true)
+        const store: Store<State> = useStore()
+        const account: Ref<Account> = ref(store.getters.getAccount)
+
+        const updateProfile = (e: Event) => {
             e.preventDefault()
-            this.$store.dispatch("updateAccount", { endpoint: "profile", details: this.account.profile.details })
-            this.$store.commit("setLoading", false)
-        },
-        updateInterests(e: Event) {
+            store.commit("setLoading", true)
+            store.dispatch("updateAccount", {
+                endpoint: "profile",
+                details: account.value.profile.details
+            })
+            store.commit("setLoading", false)
+        }
+
+        const updateInterests = (e: Event) => {
             e.preventDefault()
-            this.$store.dispatch("updateAccount", { endpoint: "interests", interests: this.account.profile.interests })
-        },
-    },
-})
+            store.dispatch("updateAccount", {
+                endpoint: "interests",
+                interests: account.value.profile.interests
+            })
+        }
+
+        return {
+            account, updateProfile, updateInterests
+        }
+
+    }
+}

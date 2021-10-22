@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary border-bottom">
     <div class="container-fluid">
       <router-link :to="isAuthenticated ? '/' : '/landing'" class="navbar-brand">
-        <img :src="constants.LOGO" style="height: 50px;" alt="Paarre" />
+        <img src="@/assets/images/Paarre-v4.png" style="height: 50px;" alt="Paarre" />
       </router-link>
       <!-- <input
         type="text"

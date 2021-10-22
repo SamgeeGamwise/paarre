@@ -1,30 +1,32 @@
-import { defineComponent } from 'vue'
+import { Ref, ref, onMounted } from 'vue'
+import { Store, useStore } from 'vuex'
+import State from '@/store/state'
 import Account from '@/models/Account'
 import ProfileCard from "@/views/_components/ProfileCard/ProfileCard.vue"
 
-export default defineComponent({
-    name: 'Home',
+export default {
     components: {
         ProfileCard
     },
-    data() {
-        return {
-            account: this.$store.getters.getAccount,
-            users: [],
-            activeProfile: new Account() as Account,
-            loaded: false
-        }
-    },
-    mounted: async function () {
-        this.users = await this.$store.dispatch("getCouples")
-        this.loaded = true
-    },
-    computed: {
+    setup() {
 
-    },
-    methods: {
-        setProfile(user: Account): void {
-            this.activeProfile = user
-        },
-    },
-})
+        const store: Store<State> = useStore()
+        const account: Ref<Account> = store.getters.getAccount
+        const users: Ref<Account[]> = ref([])
+        const activeProfile: Ref<Account> = ref(new Account())
+        const loaded: Ref<boolean> = ref(false)
+
+        const setProfile = (user: Account): void => {
+            activeProfile.value = user
+        }
+
+        onMounted(async () => {
+            users.value = await store.dispatch("getCouples")
+            loaded.value = true
+        })
+
+        return {
+            account, users, activeProfile, loaded, setProfile
+        }
+    }
+}

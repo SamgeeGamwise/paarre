@@ -1,29 +1,22 @@
-import { defineComponent } from 'vue'
-const logo = "@/images/Paarre-v4.png"
+import { Ref, ref, computed } from 'vue'
+import State from '@/store/state'
+import { Store, useStore } from 'vuex'
+import { Router, useRouter, useRoute, } from 'vue-router'
+import Account from '@/models/Account'
 
-export default defineComponent({
-    name: 'Nav',
-    data() {
-        return {
-            constants: {
-                LOGO: logo,
-            },
-            account: this.$store.getters.getAccount,
+export default {
+    setup() {
+        const store: Store<State> = useStore()
+        const router: Router = useRouter()
+        const account: Ref<Account> = ref(store.getters.getAccount)
+        const isAuthenticated: Ref<boolean> = computed(() => store.getters.isAuthenticated)
+
+        const logout = async () => {
+            await store.dispatch('logout')
+            router.push({ name: 'Landing' })
         }
-    },
-    mounted: () => {
-        console.log("Nav!")
 
-    },
-    methods: {
-        async logout() {
-            await this.$store.dispatch('logout')
-            this.$router.push({ name: 'Landing' })
-        },
-    },
-    computed: {
-        isAuthenticated(): boolean {
-            return this.$store.getters.isAuthenticated
-        },
-    },
-})
+
+        return { store, account, logout, isAuthenticated }
+    }
+}

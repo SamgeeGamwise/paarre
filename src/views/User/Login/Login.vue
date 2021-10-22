@@ -16,7 +16,7 @@
               id="loginEmail"
               placeholder="email@example.com"
               aria-describedby="email"
-              v-model="email"
+              v-model="form.email"
               required
             />
             <label for="loginEmail">Email</label>
@@ -30,7 +30,7 @@
               class="form-control"
               id="loginPassword"
               placeholder="Password"
-              v-model="password"
+              v-model="form.password"
               required
             />
             <label for="loginPassword">Password</label>
@@ -38,9 +38,18 @@
               Please enter your password.
             </div>
           </div>
-          <button type="submit" class="btn btn-primary btn-lg">
-            Login
-          </button>
+          <div class="row align-items-center">
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-lg">
+                Login
+              </button>
+            </div>
+            <div class="col-8">
+              <div v-if="error.show" class="alert alert-danger m-0 p-2" role="alert">
+                {{ error.message }}
+              </div>
+            </div>
+          </div>
         </form>
         <p>New user?</p>
         <router-link to="/user/register">Click here!</router-link>

@@ -17,7 +17,7 @@
               id="registerEmail"
               placeholder="email@example.com"
               aria-describedby="email"
-              v-model="email"
+              v-model="form.email"
               required
             />
             <label for="registerEmail">Email</label>
@@ -33,7 +33,7 @@
               placeholder="Password"
               pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
               name="up"
-              v-model="password"
+              v-model="form.password"
               required
             />
             <label for="registerPassword">Password</label>
@@ -49,7 +49,7 @@
               id="registerConfirmPassword"
               placeholder="Confirm Password"
               name="up2"
-              v-model="passwordConfirm"
+              v-model="form.passwordConfirm"
               required
             />
             <label for="registerConfirmPassword">Confirm Password</label>
@@ -68,7 +68,7 @@
                   class="form-control"
                   placeholder="First name"
                   id="firstName1"
-                  v-model="firstName1"
+                  v-model="form.firstName1"
                   required
                 />
                 <label for="firstName1">First Name</label>
@@ -81,7 +81,7 @@
                   class="form-control"
                   placeholder="Last name"
                   id="lastName1"
-                  v-model="lastName1"
+                  v-model="form.lastName1"
                   required
                 />
                 <label for="lastName1">Last Name</label>
@@ -99,7 +99,7 @@
                   class="form-control"
                   placeholder="First name"
                   id="firstName2"
-                  v-model="firstName2"
+                  v-model="form.firstName2"
                   required
                 />
                 <label for="firstName2">First Name</label>
@@ -112,16 +112,25 @@
                   class="form-control"
                   placeholder="Last name"
                   id="lastName2"
-                  v-model="lastName2"
+                  v-model="form.lastName2"
                   required
                 />
                 <label for="lastName2">Last Name</label>
               </div>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary btn-lg">
-            Register
-          </button>
+          <div class="row align-items-center">
+            <div class="col-4">
+              <button type="submit" class="btn btn-primary btn-lg">
+                Register
+              </button>
+            </div>
+            <div class="col-8">
+              <div v-if="error.show" class="alert alert-danger m-0 p-2" role="alert">
+                {{ error.message }}
+              </div>
+            </div>
+          </div>
         </form>
         <p>Already have an account?</p>
         <router-link to="/user/login">Click here!</router-link>

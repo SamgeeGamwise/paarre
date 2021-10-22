@@ -1,6 +1,6 @@
 <template>
   <div class="card profiles">
-    <img :src="constants.LOGO" class="card-img-top" alt="Avatar" />
+    <img src="@/assets/images/people.png" class="card-img-top" alt="Avatar" />
     <div class="card-body">
       <!-- <h3 class="card-title">
         {{ account.user1.firstName + ' & ' + account.user2.firstName }}

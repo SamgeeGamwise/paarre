@@ -1,50 +1,44 @@
-import User from "@/models/User";
-
-export interface AuthServerResponse {
-    data: any
-}
-
-export interface Coordinates {
+export type Coordinates = {
     latitude: number,
     longitude: number
 }
 
-export interface Passion {
-    name: string,
-    list: string[]
-}
-export interface LoginPayload {
+export type LoginType = {
     email: string,
     password: string
 }
 
-export interface RegisterPayload {
+export type RegisterType = {
+    email: string,
+    password: string,
+    passwordConfirm?: string,
     firstName1: string,
     lastName1: string,
     firstName2: string,
     lastName2: string,
-    email: string,
-    password: string
 }
 
-
-export interface UpdateAccount {
+export type UpdateAccount = {
     endpoint: string,
     [x: string]: any
 }
 
-export interface PassionListCategory {
-    name: string,
-    category: string,
-    type: string,
+// API Types
+export type AuthServerResponse = {
+    data: any
 }
 
-export interface ServerResponse<T> {
+export type ServerResponse<T> = {
     success: boolean,
     data: T
 }
 
-export interface ServerError {
+export type ServerError = {
     success: boolean,
-    data: string
+    error: string
+}
+
+export type ErrorMessage = {
+    show: boolean,
+    message: string
 }
