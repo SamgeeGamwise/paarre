@@ -43,3 +43,7 @@
 - `styles/` - Contains global .scss files
 
 - `views/` - Contains application views, .ts files, and .scss files
+
+## Backend
+
+[Project Backend Repository](https://github.com/Xoelos/paarre-backend)
