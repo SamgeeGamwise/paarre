@@ -1,6 +1,8 @@
 import Account from '@/models/Account'
 import { defineComponent, PropType } from 'vue'
 
+const logo = "@/images/people.png"
+
 export default defineComponent({
     name: 'ProfileCard',
     props: {
@@ -10,7 +12,10 @@ export default defineComponent({
     },
     data() {
         return {
-            account: this.user
+            account: this.user,
+            constants: {
+                LOGO: logo,
+            },
         }
     },
     mounted: function () {

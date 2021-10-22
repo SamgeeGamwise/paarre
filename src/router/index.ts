@@ -1,16 +1,16 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
-import store from "@/store/";
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+import store from "@/store/"
 
 // Views
-import Home from "@/views/Home/Home.vue";
-import Landing from '@/views/Landing/Landing.vue';
-import Admin from '@/views/Admin/Admin.vue';
-import About from "@/views/About/About.vue";
-import UserView from "@/views/User/User.vue";
-import Profile from "@/views/User/Profile/Profile.vue";
-import Login from '@/views/User/Login/Login.vue';
-import Register from '@/views/User/Register/Register.vue';
-import { getCookie } from '@/store/util';
+import Home from "@/views/Home/Home.vue"
+import Landing from '@/views/Landing/Landing.vue'
+import Admin from '@/views/Admin/Admin.vue'
+import About from "@/views/About/About.vue"
+import UserView from "@/views/User/User/User.vue"
+import Profile from "@/views/User/Profile/Profile.vue"
+import Login from '@/views/User/Login/Login.vue'
+import Register from '@/views/User/Register/Register.vue'
+import { getCookie } from '@/store/util'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -90,13 +90,13 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  const sid: string = getCookie("connect.sid");
+  const sid: string = getCookie("connect.sid")
 
   if (sid && !store.getters.isAuthenticated) {
     try {
       await store.dispatch("getAccount")
-    } catch (err) {
-      console.log("hi");
+    } catch (err: any) {
+      console.log(err)
     }
   }
   // If authed route

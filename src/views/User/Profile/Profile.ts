@@ -1,7 +1,7 @@
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 import SearchAddRemove from "@/views/_components/SearchAddRemove/SearchAddRemove.vue"
-import Account from '@/models/Account';
-import { getDistance, getLocation } from "@/geolocation/index";
+import Account from '@/models/Account'
+import { getDistance, getLocation } from "@/services/geolocation/index"
 
 export default defineComponent({
     name: 'Profile',
@@ -26,14 +26,14 @@ export default defineComponent({
     },
     methods: {
         updateProfile(e: Event) {
-            this.$store.commit("setLoading", true);
-            e.preventDefault();
-            this.$store.dispatch("updateAccount", { endpoint: "profile", details: this.account.profile.details });
-            this.$store.commit("setLoading", false);
+            this.$store.commit("setLoading", true)
+            e.preventDefault()
+            this.$store.dispatch("updateAccount", { endpoint: "profile", details: this.account.profile.details })
+            this.$store.commit("setLoading", false)
         },
         updateInterests(e: Event) {
-            e.preventDefault();
-            this.$store.dispatch("updateAccount", { endpoint: "interests", interests: this.account.profile.interests });
+            e.preventDefault()
+            this.$store.dispatch("updateAccount", { endpoint: "interests", interests: this.account.profile.interests })
         },
     },
-});
+})

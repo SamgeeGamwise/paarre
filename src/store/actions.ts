@@ -1,8 +1,6 @@
 import { Commit, Dispatch } from "vuex"
-import { AuthServerResponse, LoginPayload, RegisterPayload, UpdateAccount } from "../typescript/types"
-import axios from 'axios'
-
-axios.defaults.baseURL = "http://localhost:3000"
+import axios from "../services/axios"
+import { AuthServerResponse, LoginPayload, RegisterPayload, UpdateAccount } from "@/typescript/types"
 
 function err(reject: any) {
     return (error: any) => {

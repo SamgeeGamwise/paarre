@@ -1,5 +1,5 @@
-import { defineComponent } from 'vue';
-const logo = "/images/Paarre-v4.png";
+import { defineComponent } from 'vue'
+const logo = "@/images/Paarre-v4.png"
 
 export default defineComponent({
     name: 'Nav',
@@ -12,18 +12,18 @@ export default defineComponent({
         }
     },
     mounted: () => {
-        console.log("Nav!");
+        console.log("Nav!")
 
     },
     methods: {
         async logout() {
-            await this.$store.dispatch('logout');
-            this.$router.push({ name: 'Landing' });
+            await this.$store.dispatch('logout')
+            this.$router.push({ name: 'Landing' })
         },
     },
     computed: {
         isAuthenticated(): boolean {
-            return this.$store.getters.isAuthenticated;
+            return this.$store.getters.isAuthenticated
         },
     },
-});
+})
